@@ -1,1 +1,2 @@
-1. Random message part 1. 
+1. Random message part 1.
+2. This is another random message part 2. For commit 2.  
