@@ -1,1 +1,2 @@
-1. This is for the first commit. Messages will continue! 
+1. This is for the first commit. Messages will continue!
+2. This is for the second commit. Messages will end here!  
