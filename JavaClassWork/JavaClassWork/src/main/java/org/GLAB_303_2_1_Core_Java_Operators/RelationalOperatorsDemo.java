@@ -1,4 +1,4 @@
-package org.example.GLAB_303_2_1_Core_Java_Operators;
+package org.GLAB_303_2_1_Core_Java_Operators;
 
 public class RelationalOperatorsDemo {
     public static void main(String[] args)
@@ -22,4 +22,4 @@ public class RelationalOperatorsDemo {
                 + (variable1 == variable3));
     }
 
-    }
+}

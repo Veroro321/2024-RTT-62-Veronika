@@ -1,0 +1,14 @@
+{
+  "name": "org",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/Veroro321/2024-RTT-62-Veronika.git"
+  },
+  "private": true
+}

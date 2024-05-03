@@ -1,4 +1,4 @@
-package org.example.GLAB_303_2_1_Core_Java_Operators;
+package org.GLAB_303_2_1_Core_Java_Operators;
 
 public class ArithmeticOperatorsDemo {
     public static void main(String[] args) {
@@ -35,6 +35,5 @@ public class ArithmeticOperatorsDemo {
         System.out.println("d1 is " + d1);
         System.out.println("d2 is " + d2);
     }
-
 
 }
