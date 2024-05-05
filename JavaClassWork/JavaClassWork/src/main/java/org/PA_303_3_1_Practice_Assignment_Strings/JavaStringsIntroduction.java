@@ -30,4 +30,3 @@ public class JavaStringsIntroduction {
         System.out.println(capitalizedA + " " + capitalizedB);
     }
     }
-}

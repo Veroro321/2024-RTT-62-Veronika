@@ -3,7 +3,6 @@ import java.util.Scanner;
 
 public class ReadStringFromConsoleInput {
     public static void main(String[] args) {
-        public static void main(String[] args) {
             Scanner input = new Scanner(System.in);
             System.out.print("Enter three words separated by spaces: ");
             String s1 = input.next();
@@ -15,4 +14,3 @@ public class ReadStringFromConsoleInput {
         }
 
     }
-}
