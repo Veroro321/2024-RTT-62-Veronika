@@ -1,4 +1,5 @@
 package org.GLAB_303_5_1_For_Loop;
+import java.util.Scanner;
 
 public class Palidrome {
     public static void main(String[] args) {
