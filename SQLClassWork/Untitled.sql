@@ -7,7 +7,8 @@ GROUP BY productline_id;
 -- question 0.2
 -- I want to see a list of employees and all of the customers for that employee.   Employee name will be duplicated in the result set.   I want to see the employee first and last name
 -- and the customer contact first and last name as well as the customer name
-SELECT 
+
+SELECT
     e.firstName AS EmployeeFirstName,
     e.lastName AS EmployeeLastName,
     c.contact_firstName AS CustomerContactFirstName,
@@ -20,14 +21,17 @@ ORDER BY
 
 -- question 0.3
 -- I want to see a list of employees in each office. Show the office name and the employee name
-SELECT 
-    o.officeName AS OfficeName,
-    e.firstName AS EmployeeFirstName,
-    e.lastName AS EmployeeLastName
-FROM 
-    offices o, employees e
-ORDER BY 
-    o.officeName, e.lastName, e.firstName;
+SELECT
+    o.city AS office_name,
+    e.firstname AS employee_first_name,
+    e.lastname AS employee_last_name
+FROM
+    employees e,
+    offices o
+WHERE
+    e.office_id = o.id
+ORDER BY
+    o.city, e.lastname, e.firstname;
 
 -- question 0.4
 -- I want to see the totaly number of each employee type based on job title.. result should the job title and the number of employess with that job title.
@@ -36,8 +40,6 @@ FROM employees
 GROUP BY job_title;
 -- question 0.5
 -- I want to see a list of all payments each customer has made.  Order the list by custoemr name ascending, then by the payment amount descending
--- Question 0.5
--- I want to see a list of all payments each customer has made. Order the list by customer name ascending, then by the payment amount descending
 SELECT c.customer_name, p.*
 FROM customers c, payments p
 WHERE c.Id = p.customer_id
@@ -51,6 +53,7 @@ SELECT *
 FROM products
 WHERE id NOT IN (SELECT product_id FROM orderdetails);
 
+
 -- question 0.7
 -- are there any customers that have never made an order
 SELECT *
@@ -58,11 +61,12 @@ FROM customers
 WHERE Id NOT IN (SELECT DISTINCT customer_id FROM orders);
 
 -- Question 1
--- How many customer are handled by each office.  I want to see the office name and the count of the number of customers in that office.
-SELECT o.city AS office_name, COUNT(*) AS num_customers
+-- How many customer are handled by each office. I want to see the office name and the count of the number of customers in that office.
+SELECT o.city AS office_name, COUNT(c.Id) AS num_customers
 FROM offices o, customers c
-WHERE o.Id = c.office_id
+WHERE o.Id = c.sales_rep_employee_id
 GROUP BY o.city;
+
 -- Question 2
 -- I want to see the products with the most margin at the top of the table.  Include the product name, buy price, msrp, and margin in the results.  Margin is calculated (MSPR - buy_price) 
 -- Question 2
@@ -74,11 +78,11 @@ ORDER BY margin DESC;
 -- Question 2.5
 -- I want to see the top 5 customers in each state based on margin 
 
-SELECT c.state, c.customer_name, SUM(p.amount) AS total_amount
+SELECT c.state, c.customer_name, SUM(p.amount) AS margin
 FROM customers c, payments p
 WHERE c.Id = p.customer_id
 GROUP BY c.state, c.customer_name
-ORDER BY c.state, total_amount DESC
+ORDER BY c.state, margin DESC
 LIMIT 5;
 
 -- Question 3
@@ -149,7 +153,7 @@ ORDER BY status ASC;
 -- I want to see the office name and the distinct product lines that have been sold in that office.  This will require joining almost all of the tables.  
 -- select distinct o.name as office_name, pl.productlines as product_line_name  ....
 
-=SELECT DISTINCT o.city AS office_name, pl.productlines AS product_line_name
+SELECT DISTINCT o.city AS office_name, pl.productlines AS product_line_name
 FROM offices o, employees e, customers c, orders o, orderdetails od, products p, productlines pl
 WHERE o.Id = e.office_id
 AND e.Id = c.sales_rep_employee_id
