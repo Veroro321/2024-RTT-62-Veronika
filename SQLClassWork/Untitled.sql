@@ -16,8 +16,11 @@ SELECT
     c.customer_name AS CustomerName
 FROM 
     employees e, customers c
+WHERE
+    e.Id = c.sales_rep_employee_id
 ORDER BY 
     e.lastName, e.firstName, c.customer_name;
+
 
 -- question 0.3
 -- I want to see a list of employees in each office. Show the office name and the employee name
