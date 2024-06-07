@@ -3,17 +3,20 @@ package org.example.database.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Setter
+
 @Getter
+@Setter
 @Entity
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "employees")
+
 public class Employee {
 
-    @Id // this is telling hibernate this column is the PK
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  // this telling hibernate that the PK is auto increment
+
+    @Id // this tells hibernate that this column is the PK
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // this tells hibernate that the column is autoincremented
     @Column(name = "id")
     private Integer id;
 
@@ -21,10 +24,10 @@ public class Employee {
     private Integer officeId;
 
     @Column(name = "lastname")
-    private String lastname;
+    private String lastName;
 
     @Column(name = "firstname")
-    private String firstname;
+    private String firstName;
 
     @Column(name = "extension")
     private String extension;
@@ -43,6 +46,7 @@ public class Employee {
 
     @Column(name = "profile_image_url")
     private String profileImageUrl;
+
 
 
 }

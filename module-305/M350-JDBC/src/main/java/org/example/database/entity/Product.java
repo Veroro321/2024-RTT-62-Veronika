@@ -1,16 +1,20 @@
 package org.example.database.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
+
 @Setter
+@Getter
 @Entity
-@Table (name = "products")
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "products")
 public class Product {
-    @Id // this is telling hibernate this column is the PK
-    @GeneratedValue(strategy = GenerationType.IDENTITY)  // this telling hibernate that the PK is auto increment
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
@@ -21,7 +25,7 @@ public class Product {
     private String productName;
 
     @Column(name = "productline_id")
-    private Integer productlineId;
+    private Integer productLineId;
 
     @Column(name = "product_scale")
     private String productScale;
@@ -29,15 +33,17 @@ public class Product {
     @Column(name = "product_vendor")
     private String productVendor;
 
-    @Column(name = "product_description")
+    @Column(name = "product_description", columnDefinition="TEXT")
     private String productDescription;
 
-    @Column(name = "quantity_in_stock")
+    @Column(name = "quantity_in_stock", columnDefinition = "SMALLINT")
     private Integer quantityInStock;
 
-    @Column(name = "buy_price")
-    private Float buyPrice;
+    @Column(name = "buy_price", columnDefinition = "DECIMAL")
+    private Double buyPrice;
 
-    @Column(name = "msrp")
-    private Float msrp;
+    @Column(name = "msrp", columnDefinition = "DECIMAL")
+    private Double msrp;
+
+
 }

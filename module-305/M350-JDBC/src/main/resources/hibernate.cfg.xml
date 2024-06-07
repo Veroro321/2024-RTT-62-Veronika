@@ -20,8 +20,8 @@
 
         <mapping class="org.example.database.entity.Employee"/>
         <mapping class="org.example.database.entity.Customer"/>
-<!--        <mapping class="org.example.database.entity.Order"/>-->
-<!--        <mapping class="org.example.database.entity.OrderDetail"/>-->
+        <mapping class="org.example.database.entity.Order"/>
+        <mapping class="org.example.database.entity.OrderDetails"/>
         <mapping class="org.example.database.entity.Product"/>
     </session-factory>
 </hibernate-configuration>
