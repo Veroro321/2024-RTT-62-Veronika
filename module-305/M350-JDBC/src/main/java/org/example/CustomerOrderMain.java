@@ -39,14 +39,14 @@ public class CustomerOrderMain {
         }
     }
 
-    public void printOrders(List<Order> orders) {
-        System.out.println("Order ID | Order Date | Status | Comments");
-        System.out.println("=========================================================");
+    private void printOrders(List<Order> orders) {
+        System.out.println("Order ID | Order Date | Shipped Date | Status | Comments");
+        System.out.println("==============================================================");
         for (Order order : orders) {
-            System.out.println(order.getId() + " | " + order.getOrderDate() + " | " + order.getStatus() + " | " + order.getComments());
+            System.out.println(order.getId() + " | " + order.getOrderDate() + " | " + order.getShippedDate() + " | " + order.getStatus() + " | " + order.getComments());
         }
-        System.out.println("\n");
     }
+
 
     public static void main(String[] args) {
         CustomerOrderMain com = new CustomerOrderMain();
