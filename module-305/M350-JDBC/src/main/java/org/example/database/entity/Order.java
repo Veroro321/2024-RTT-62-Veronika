@@ -5,7 +5,6 @@ import lombok.*;
 
 import java.util.Date;
 
-
 @Getter
 @Setter
 @Entity
@@ -13,16 +12,14 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "orders")
-
 public class Order {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "customer_id")
+    @Column(name = "customer_id", insertable = false, updatable = false)
     private Integer customerID;
 
     @Column(name = "order_date", columnDefinition = "DATE")
@@ -39,4 +36,8 @@ public class Order {
 
     @Column(name = "comments")
     private String comments;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 }
