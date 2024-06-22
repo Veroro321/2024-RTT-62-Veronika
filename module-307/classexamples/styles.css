@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+.center-text {
+    text-align: center;
+    margin-top: 20px;
+    color: #2c3e50; /* Dark Blue */
+}
+
+.profile {
+    display: flex;
+    align-items: flex-start;
+    margin: 20px;
+    background-color: #ecf0f1; /* Light Grey */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.profile img {
+    width: 150px;
+    height: 150px;
+    margin-right: 20px;
+    border: 2px solid #3498db; /* Blue Border */
+}
+
+.hobbies ol {
+    margin-left: 20px;
+    color: #2c3e50; /* Dark Blue */
+}
+
+.summary {
+    margin: 20px;
+    color: #2c3e50; /* Dark Blue */
+    background-color: #ecf0f1; /* Light Grey */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.bootcamp {
+    margin: 20px;
+    color: #2c3e50; /* Dark Blue */
+    background-color: #ecf0f1; /* Light Grey */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.important {
+    font-weight: bold;
+    color: #e74c3c; /* Red */
+}
+
+a {
+    color: #3498db; /* Blue */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #2980b9; /* Darker Blue */
+}

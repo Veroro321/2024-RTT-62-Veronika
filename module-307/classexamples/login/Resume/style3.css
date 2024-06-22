@@ -1,0 +1,124 @@
+body {
+    background-color: #141414;
+    font-family: Arial, sans-serif;
+    color: #F7FFFF;
+    margin: 0;
+    padding: 0;
+}
+
+.resume-body {
+    background-color: #282828;
+    margin: 25px;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.profile-pic {
+    height: 100px;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+.info {
+    padding-left: 15px;
+}
+
+.full-name {
+    margin: 0;
+    color: #F7FFFF;
+    padding-top: 10px;
+}
+
+.career-title {
+    margin: 0;
+    color: #54A7C5;
+}
+
+.contact-info {
+    text-align: right;
+}
+
+.divider {
+    border-top: 2px solid #54A7C5;
+    margin: 20px 0;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.employment-skills {
+    display: flex;
+    justify-content: space-between;
+}
+
+.employment, .skills {
+    width: 48%;
+}
+
+.job {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.job-title {
+    font-weight: bold;
+}
+
+.job-date {
+    text-align: right;
+    color: #54A7C5;
+}
+
+.skills {
+    text-align: left;
+}
+
+.skill-bar {
+    background-color: grey;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.skill-bar-fill {
+    height: 10px;
+}
+
+.skill-bar-fill.java { background-color: red; width: 80%; }
+.skill-bar-fill.sql { background-color: blue; width: 70%; }
+.skill-bar-fill.html { background-color: green; width: 90%; }
+.skill-bar-fill.css { background-color: yellow; width: 85%; }
+
+.education-languages {
+    display: flex;
+    justify-content: space-between;
+}
+
+.education, .languages {
+    width: 48%;
+}
+
+.school-year {
+    text-align: left;
+}
+
+ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
