@@ -1,14 +1,14 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+<jsp:include page="include/header.jsp" />
+
 <h1>This is my first JSP page</h1>
 <h2>${message}</h2>
-</body>
-</html>
+
+
+<table class="table">
+    <tr><td>id</td><td>${productKey.id}</td></tr>
+    <tr><td>code</td><td>${productKey.productCode}</td></tr>
+    <tr><td>name</td><td>${productKey.productName}</td></tr>
+    <tr><td>description</td><td>${productKey.productDescription}</td></tr>
+</table>
+
+<jsp:include page="include/footer.jsp" />
