@@ -27,7 +27,10 @@
                     <a class="nav-link" href="/page-url">2nd Page</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/search">Search</a>
+                    <a class="nav-link" href="/search">Product Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/employee/search">Employee Search</a>
                 </li>
             </ul>
         </div>

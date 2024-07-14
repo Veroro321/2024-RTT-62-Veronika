@@ -18,7 +18,7 @@ import java.util.List;
 public class IndexController {
 
     @Autowired
-    private ProductDAO productDao;
+    private ProductDAO productDao; //this is so that we can actually use the productdao
 
 
     // this function is for the home page of the website which is express as just a plain slash "/"
