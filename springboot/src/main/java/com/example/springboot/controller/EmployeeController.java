@@ -21,8 +21,12 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeDAO employeeDao;
+
+    /*
     @Autowired
     private CustomerDAO customerDao;
+    */
+
 
     @GetMapping("/search")
     public ModelAndView search(@RequestParam(required = false) String search) {
@@ -32,11 +36,14 @@ public class EmployeeController {
 
         response.addObject("search", search);
 
+
         List<Employee> employees = employeeDao.findByFirstnameOrLastname(search);
         response.addObject("employees", employees);
 
         return response;
     }
+
+    /*
 
     // New method to list customers for an employee
     @GetMapping("/customer/list")
@@ -53,6 +60,7 @@ public class EmployeeController {
 
         return response;
     }
+    */
 
 
 }

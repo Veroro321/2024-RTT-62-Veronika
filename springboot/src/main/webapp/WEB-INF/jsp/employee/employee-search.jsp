@@ -44,7 +44,7 @@
                         <th>Last Name</th>
                         <th>Email</th>
                         <th>Job Title</th>
-                        <th>View Customer</th>
+                        <th>View Customers</th>
                     </tr>
                     <c:forEach items="${employees}" var="employee">
                         <tr>
@@ -53,7 +53,8 @@
                             <td>${employee.lastname}</td>
                             <td>${employee.email}</td>
                             <td>${employee.jobTitle}</td>
-                            <td><a href="/customer/list?employeeId=${employee.id}">View Customer</a></td> <!-- Link to customer list -->
+                            <!-- this is the link to the customer for that employee-->
+                            <td><a href="/customer/list?employeeId=${employee.id}">View Customer</a></td>
                         </tr>
                     </c:forEach>
                 </table>

@@ -39,6 +39,40 @@
                 </table>
             </div>
         </div>
+
+        <div class="row pt-5">
+            <div class="col-12">
+                <h2 class="text-center">Orders</h2>
+            </div>
+        </div>
+        <div class="row pt-3">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Order Date</th>
+                        <th>Required Date</th>
+                        <th>Status</th>
+                        <th>Comments</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${orders}" var="order">
+                        <tr>
+                            <td>${order.id}</td>
+                            <td>${order.orderDate}</td>
+                            <td>${order.requiredDate}</td>
+                            <td>${order.status}</td>
+                            <td>${order.comment}</td>
+
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </section>
 
