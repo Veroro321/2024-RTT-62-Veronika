@@ -1,15 +1,19 @@
 package com.example.springboot.controller;
 
 import com.example.springboot.database.dao.CustomerDAO;
+import com.example.springboot.database.dao.EmployeeDAO;
 import com.example.springboot.database.dao.OrderDAO;
 import com.example.springboot.database.entity.Customer;
 
+import com.example.springboot.database.entity.Employee;
 import com.example.springboot.database.entity.Order;
+import com.example.springboot.form.CreateCustomerFormBean;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,6 +30,9 @@ public class CustomerController {
 
     @Autowired
     private OrderDAO orderDao;
+
+    @Autowired
+    private EmployeeDAO employeeDao;
 
     //this URL is going to be localhost:8080/customer/list
     //this is going to give us a list of customers for that employee
@@ -58,4 +65,46 @@ public class CustomerController {
 
         return response;
     }
+
+    // this is for the create customer details page
+
+    @GetMapping("/create")
+    public ModelAndView create() {
+        ModelAndView response = new ModelAndView("customer/create");
+
+        List<Employee> employees = employeeDao.findAll();
+        response.addObject("employees", employees);
+
+        return response;
+    }
+
+    @GetMapping("/createSubmit")
+    public ModelAndView createSubmit(CreateCustomerFormBean form) {
+        ModelAndView response = new ModelAndView();
+
+        log.debug(form.toString());
+
+        Customer customer = new Customer();
+        customer.setCustomerName(form.getCustomerName());
+        customer.setContactFirstname(form.getContactFirstname());
+        customer.setContactLastname(form.getContactLastname());
+        customer.setPhone(form.getPhone());
+        customer.setAddressLine1(form.getAddressLine1());
+        customer.setAddressLine2(form.getAddressLine2());
+        customer.setCity(form.getCity());
+        customer.setState(form.getState());
+        customer.setPostalCode(form.getPostalCode());
+        customer.setCountry(form.getCountry());
+        customer.setCreditLimit(form.getCreditLimit());
+
+        Employee salesRep = employeeDao.findById(form.getSalesRepEmployeeId());
+        customer.setEmployee(salesRep);
+
+        customer = customerDao.save(customer);
+        response.setViewName("redirect:/customer/details?Id=" + customer.getId());
+
+        return response;
+    }
+
+
 }

@@ -33,7 +33,10 @@
                     <a class="nav-link" href="/employee/search">Employee Search</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/employee/create">Create</a>
+                    <a class="nav-link" href="/employee/create">Employee Create</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/customer/create">Customer Create</a>
                 </li>
             </ul>
         </div>
