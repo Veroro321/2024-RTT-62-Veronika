@@ -92,6 +92,13 @@ public class EmployeeController {
         employee.setProfileImageUrl(form.getProfileImageUrl());
         employee.setVacationHours(form.getVacationHours());
 
+        employee.setJobTitle("Job Title");
+
+        Office office = officeDAO.findById(form.getOfficeId());
+
+        //this won twork because it's set to insertable =false and updateable = false
+        //employee.setOfficeId(1);
+        employee.setOffice(office);
 
         //when we save to database it will auto increment to give us a new id
         //new ID is avlaiable in the return from the save method

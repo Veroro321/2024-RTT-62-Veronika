@@ -19,6 +19,9 @@ public class Office {
     @Column(name = "id")
     private int id;
 
+    @OneToMany(mappedBy = "office", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Employee> employees;
+
     @Column(name = "city")
     private String city;
 

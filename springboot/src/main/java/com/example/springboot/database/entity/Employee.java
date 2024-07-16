@@ -27,7 +27,13 @@ public class Employee {
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY,  cascade = CascadeType.ALL)
     private List<Customer> customers;
 
-    @Column(name = "office_id")
+  //include @many to one
+  @ToString.Exclude
+  @ManyToOne(fetch = FetchType.LAZY, optional =true)
+  @JoinColumn(name = "office_id", nullable = true)
+  private Office office;
+
+    @Column(name = "office_id",insertable = false, updatable = false)
     private Integer officeId;
 
     @Column(name = "lastname")
