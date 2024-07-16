@@ -32,6 +32,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/employee/search">Employee Search</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/employee/create">Create</a>
+                </li>
             </ul>
         </div>
     </div>
