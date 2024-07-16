@@ -16,4 +16,11 @@ public class CreateEmployeeFormBean {
     private String lastName;
     //we are going to make this data type an integer
     private Integer reportsTo;
+    // this is for the officeId
+    private Integer officeId;
+    private String extension;
+    private String jobTitle;
+    private String profileImageUrl;
+    private Integer vacationHours;
+
 }
