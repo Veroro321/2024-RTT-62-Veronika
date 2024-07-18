@@ -33,6 +33,8 @@ public class Employee {
   @JoinColumn(name = "office_id", nullable = true)
   private Office office;
 
+  //in essence this field is a read only field and the database wil ignore it on update or insert
+
     @Column(name = "office_id",insertable = false, updatable = false)
     private Integer officeId;
 

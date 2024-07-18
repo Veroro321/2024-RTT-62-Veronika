@@ -18,7 +18,7 @@
             </tr>
             <tr>
                 <td style="font-weight: bolder;">Office ID:</td>
-                <td>${employee.officeId}</td> <%-- can make is to that you bounce through employee.office.city so it shows the name instead of 3 --%>
+                <td>${employee.office.city}</td> <%-- can make is to that you bounce through employee.office.city so it shows the name instead of 3 --%>
             </tr>
             <tr>
                 <td style="font-weight: bolder;">Full Name:</td>

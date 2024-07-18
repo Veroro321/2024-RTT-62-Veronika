@@ -6,14 +6,20 @@ import com.example.springboot.database.dao.OrderDAO;
 import com.example.springboot.database.entity.Customer;
 
 import com.example.springboot.database.entity.Employee;
+import com.example.springboot.database.entity.Office;
 import com.example.springboot.database.entity.Order;
 import com.example.springboot.form.CreateCustomerFormBean;
+import com.example.springboot.form.CreateEmployeeFormBean;
 import lombok.extern.slf4j.Slf4j;
+import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -79,32 +85,55 @@ public class CustomerController {
     }
 
     @GetMapping("/createSubmit")
-    public ModelAndView createSubmit(CreateCustomerFormBean form) {
+    public ModelAndView createSubmit(@Valid CreateCustomerFormBean form, BindingResult bindingResult) {
         ModelAndView response = new ModelAndView();
 
-        log.debug(form.toString());
+        // If there are validation errors, log them and return to the create for
+        if (bindingResult.hasErrors()) {
+            for (ObjectError error : bindingResult.getAllErrors()) {
+                log.debug("Validation error : " + ((FieldError) error).getField() + " = " + error.getDefaultMessage());
+            }
 
-        Customer customer = new Customer();
-        customer.setCustomerName(form.getCustomerName());
-        customer.setContactFirstname(form.getContactFirstname());
-        customer.setContactLastname(form.getContactLastname());
-        customer.setPhone(form.getPhone());
-        customer.setAddressLine1(form.getAddressLine1());
-        customer.setAddressLine2(form.getAddressLine2());
-        customer.setCity(form.getCity());
-        customer.setState(form.getState());
-        customer.setPostalCode(form.getPostalCode());
-        customer.setCountry(form.getCountry());
-        customer.setCreditLimit(form.getCreditLimit());
+            // we are in this part of the if statement so we know for sure that an error has occured
+            // we are going to add the binding result to the model, so we can use it on the JSP page to show the user the errors
+            response.addObject("bindingResult", bindingResult);
 
-        Employee salesRep = employeeDao.findById(form.getSalesRepEmployeeId());
-        customer.setEmployee(salesRep);
+            //since we have a sale rep list drop down we need to add that to that model
+            List<Employee> employees = employeeDao.findAll();
+            response.addObject("employees", employees);
 
-        customer = customerDao.save(customer);
-        response.setViewName("redirect:/customer/details?Id=" + customer.getId());
+            response.setViewName("customer/create"); // Return to the create form
 
-        return response;
+            // im going to add the form to the model so that we can display the user entered data in the form
+            response.addObject("form", form);
+
+            return response;
+        } else {
+            // If no errors, proceed with saving the customer
+
+            log.debug(form.toString());
+
+            Customer customer = new Customer();
+            customer.setCustomerName(form.getCustomerName());
+            customer.setContactFirstname(form.getContactFirstname());
+            customer.setContactLastname(form.getContactLastname());
+            customer.setPhone(form.getPhone());
+            customer.setAddressLine1(form.getAddressLine1());
+            customer.setAddressLine2(form.getAddressLine2());
+            customer.setCity(form.getCity());
+            customer.setState(form.getState());
+            customer.setPostalCode(form.getPostalCode());
+            customer.setCountry(form.getCountry());
+            customer.setCreditLimit(form.getCreditLimit());
+
+            Employee salesRep = employeeDao.findById(form.getSalesRepEmployeeId());
+            customer.setEmployee(salesRep);
+
+            customer = customerDao.save(customer);
+            response.setViewName("redirect:/customer/details?Id=" + customer.getId());
+
+            return response;
+        }
+
     }
-
-
 }

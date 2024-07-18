@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%-- this is the tag which is brought from JSTL dep, needed so that u can do a loop --%>
 
 <jsp:include page="include/header.jsp" />
 
@@ -48,7 +49,7 @@
                         <th>description</th>
                         <th>edit</th>
                     </tr>
-                    <c:forEach items="${products}" var="product">
+                    <c:forEach items="${products}" var="product"> <%--the var="customer" in the <c:forEach> tag is used to iterate over a collection of customer objects and assign each customer object to the variable customer during each iteration of the loop. This allows you to access the properties of each customer within the loop.  --%>
                         <tr>
                             <td><a href="/?id=${product.id}">${product.id}</a></td>
                             <td>${product.productCode}</td>
