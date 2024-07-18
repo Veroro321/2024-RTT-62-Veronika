@@ -20,6 +20,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -84,7 +85,7 @@ public class CustomerController {
         return response;
     }
 
-    @GetMapping("/createSubmit")
+    @PostMapping("/createSubmit") //why did this fix my code? adding a post mapping instead of getmapping? 
     public ModelAndView createSubmit(@Valid CreateCustomerFormBean form, BindingResult bindingResult) {
         ModelAndView response = new ModelAndView();
 
