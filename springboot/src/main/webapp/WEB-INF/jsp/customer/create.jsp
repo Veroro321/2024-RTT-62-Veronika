@@ -11,6 +11,18 @@
     </div>
 </section>
 
+<c:if test="${not empty errorMessage}">
+    <section>
+        <div class="row">
+            <div class="col-auto">
+                <div class="alert alert-danger">
+                        ${errorMessage}
+                </div>
+            </div>
+        </div>
+    </section>
+</c:if>
+
 <section>
     <div class="container">
         <div class="row pt-5">

@@ -5,7 +5,12 @@
 <section style="background-color:gray">
     <div class="container">
         <div class="row pt-5 pb-5">
-            <h1 class="text-center">Create Employee</h1>
+            <c:if test="${empty form.employeeId}">
+                <h1 class="text-center">Create Employee</h1>
+            </c:if>
+            <c:if test="${not empty form.employeeId}"> <%-- if employee is not empty then show --%>
+                <h1 class="text-center">Edit Employee</h1>
+            </c:if>
         </div>
     </div>
 </section>
@@ -15,6 +20,9 @@
         <div class="row pt-5 ">
             <div class="col-12">
                 <form action="/employee/createSubmit">
+                    <input type ="hidden" name="employeeId" value="${form.employeeId}"> <%-- input field will not be visible to the user on the webpage.
+                    However, it will still be included when the form is submitted.--%>
+
                     <div class="row align-items-center justify-content-center pb-3">
                         <div class="col-2">
                             <label for="emailId" class="col-form-label">Email</label>

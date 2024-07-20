@@ -85,7 +85,7 @@ public class CustomerController {
         return response;
     }
 
-    @PostMapping("/createSubmit") //why did this fix my code? adding a post mapping instead of getmapping? 
+    @PostMapping("/createSubmit") //why did this fix my code? adding a post mapping instead of getmapping?
     public ModelAndView createSubmit(@Valid CreateCustomerFormBean form, BindingResult bindingResult) {
         ModelAndView response = new ModelAndView();
 

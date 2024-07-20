@@ -72,6 +72,56 @@ public class EmployeeController {
 
     }
 
+    //here we have some duplicated code that could be turned into a method!!!
+
+    @GetMapping("/edit")
+    public ModelAndView edit(@RequestParam(required = false) Integer employeeId) {
+        //this is setting up the view for rendering
+        ModelAndView response = new ModelAndView("employee/create");
+
+        //by setting required=false on the incoming parameter we allow null to enter the controller so that spring does not cause an error page
+        //then we check if the input is null before trying to do our query
+
+        // because the page needs the list of employees(sales-rep) for the drop-down we need to add the list of employees to the model
+        //this code can be refactored because it is duplicated
+        List<Employee> reportsToEmployees = employeeDao.findAll();
+        response.addObject("reportsToEmployees", reportsToEmployees);
+
+        // we need the list of offices
+        List<Office> offices = officeDAO.findAll();
+        response.addObject("reportsToOffices", offices);
+
+        if (employeeId !=null) {
+            //load the employee form the database and set the form bean with all the employee values
+            // this is because the form bean is on the jsp page and we need to pre-populate the form with the employee data
+
+            Employee employee = employeeDao.findById(employeeId);
+            if (employee != null) {
+                //we only do this code if we found an employee in the database
+                CreateEmployeeFormBean form = new CreateEmployeeFormBean();
+                form.setEmployeeId(employee.getId());
+                form.setEmail(employee.getEmail());
+                form.setFirstName(employee.getFirstname());
+                form.setLastName(employee.getFirstname());
+                form.setLastName(employee.getLastname());
+                form.setReportsTo(employee.getReportsTo());
+                form.setOfficeId(employee.getOffice().getId());
+                form.setExtension(employee.getExtension()); //if data is not populating correctly it may be due to this issue
+                form.setJobTitle(employee.getJobTitle());
+                form.setVacationHours(employee.getVacationHours());
+                form.setProfileImageUrl(employee.getProfileImageUrl());
+
+                response.addObject("form", form);
+            } else {
+                // the employee was not found in the database
+                response.addObject("errorMessage", "The employee was not found in the database.");
+            }
+
+        }
+
+        return response;
+    }
+
     // this is /employee/createSubmit
     //this method is only called when the form is submitted
 
@@ -94,9 +144,8 @@ public class EmployeeController {
             List<Employee> reportsToEmployees = employeeDao.findAll();
             response.addObject("reportsToEmployees", reportsToEmployees);
 
-            // we need the list of offices
             List<Office> offices = officeDAO.findAll();
-            response.addObject("officeAll", offices); //please check this line offices or offices all
+            response.addObject("reportsToOffices", offices);
 
             // im going to set the view name to be
             response.setViewName("employee/create");
@@ -111,10 +160,17 @@ public class EmployeeController {
             // variable name
 
             log.debug(form.toString());
+            //first I am going to take a shot at looking up the record in the database based on the incoming employeeId
+            //this is from the hidden input field and is not something the user actually entered themselves
 
             //setting the incoming user input onto a new employee object to be saved to the database
+            Employee employee = employeeDao.findById(form.getEmployeeId());
+            if (employee == null) {
+                //this means that it was not found in the database so we are going to consider this is a create
+                employee = new Employee();
 
-            Employee employee = new Employee(); //creating a new employee
+            }
+
             employee.setEmail(form.getEmail()); //setting the email, we can hardcode it, but we can save it to our data by
             employee.setFirstname(form.getFirstName());
             employee.setLastname(form.getLastName());
@@ -162,7 +218,6 @@ public class EmployeeController {
 
             return response;
         }
-
 
 
 

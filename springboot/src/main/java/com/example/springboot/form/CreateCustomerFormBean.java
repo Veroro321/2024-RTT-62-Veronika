@@ -26,7 +26,7 @@ public class CreateCustomerFormBean {
     private String contactLastname;
 
     @NotEmpty(message = "Phone number is required.")
-    @Pattern(regexp = "\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})", message = "Invalid phone number format.")
+    @Pattern(regexp = "\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{3})", message = "Invalid phone number format.")
     private String phone;
 
     @NotEmpty(message = "Address Line 1 is required.")

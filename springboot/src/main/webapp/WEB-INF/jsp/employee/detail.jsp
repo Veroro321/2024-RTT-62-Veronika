@@ -15,6 +15,9 @@
             <tr>
                 <td style="font-weight: bolder;">Employee ID:</td>
                 <td>${employee.id}</td>
+                <tb><a href="?employee/employeeId=${employee.id}">${employee.id}</a></tb>
+                <%-- this is where there is going to be an anchor tag --%>
+
             </tr>
             <tr>
                 <td style="font-weight: bolder;">Office ID:</td>
@@ -41,6 +44,12 @@
                 <td>${employee.vacationHours}</td>
             </tr>
         </table>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class ="col-auto">
+            <a href="/employee/edit?employeeId=${employee.id}">Edit</a>
+        </div>
     </div>
 
 </section>
