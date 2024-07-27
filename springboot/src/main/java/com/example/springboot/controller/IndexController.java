@@ -1,6 +1,8 @@
 package com.example.springboot.controller;
 
+import com.example.springboot.database.dao.EmployeeDAO;
 import com.example.springboot.database.dao.ProductDAO;
+import com.example.springboot.database.entity.Employee;
 import com.example.springboot.database.entity.Product;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -8,8 +10,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 
@@ -19,6 +25,9 @@ public class IndexController {
 
     @Autowired
     private ProductDAO productDao; //this is so that we can actually use the productdao
+
+    @Autowired
+    private EmployeeDAO employeeDAO;
 
 
     // this function is for the home page of the website which is express as just a plain slash "/"
@@ -88,6 +97,59 @@ public class IndexController {
 
         return response;
     }
+
+    @GetMapping("/file-upload") //not post because it just shows the page
+    public ModelAndView fileUpload(@RequestParam Integer employeeId) {
+        //this page is for another page of the website which is expressed as "/page-url"
+        ModelAndView response = new ModelAndView("file-upload");
+        response.addObject("employeeId", employeeId);
+
+        return response;
+    }
+
+    @PostMapping("/file-upload")
+    public ModelAndView fileUploadSubmit(@RequestParam MultipartFile file, @RequestParam Integer employeeId) {
+        // this page is for another page of the website which is express as "/page-url"
+        ModelAndView modelAndView = new ModelAndView("redirect:/employee/detail?employeeId=" + employeeId);
+
+        log.debug("The file name is: " + file.getOriginalFilename());
+        log.debug("The file size is: " + file.getSize());
+        log.debug("The file content type is: " + file.getContentType());
+
+        //homework
+        //use the original file name and get a substring of the last index
+        // then restrict based on jpg or png
+        // use the model to put an error message on the page
+
+        //location on hard drve
+
+        String saveFilename = "./src/main/webapp/pub/images/" + file.getOriginalFilename();
+
+        // this files.copy is a utility that will read the stream one chunk at a time and write it to a file.
+        // this would not compile, getinput stream gets pissed, Files.copy(file.getInputStream(), Paths.get(saveFilename)), StandardCopyOption.REPLACE_EXISTING);
+//first argument is the input stream coming from the file, second is the file that we want to save it too, the third if the thing exists please replace it
+        //first argument is the input stream to read from the uploaded file
+        //2nd is the file name where we want to write the file
+        //3rd says to overwrite if existing.
+
+        try{
+            Files.copy(file.getInputStream(), Paths.get(saveFilename), StandardCopyOption.REPLACE_EXISTING);
+        } catch (Exception e){
+            log.error("unable to finish reading file", e);
+        }
+
+        // we can load the record from the database based on the incoming employeeId
+        Employee employee = employeeDAO.findById(employeeId);
+
+        // this is the URL to get the image
+        String url = "/pub/images/" + file.getOriginalFilename();
+        employee.setProfileImageUrl(url);
+
+        employeeDAO.save(employee);
+
+        return modelAndView;
+    }
+
 
 
 
