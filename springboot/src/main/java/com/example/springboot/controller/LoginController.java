@@ -4,6 +4,7 @@ package com.example.springboot.controller;
 import com.example.springboot.database.dao.UserDAO;
 import com.example.springboot.database.entity.User;
 import com.example.springboot.form.CreateAccountFormBean;
+import com.example.springboot.service.UserService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Date;
+import java.util.*;
+
 
 @Slf4j
 @Controller
@@ -26,7 +29,10 @@ public class LoginController {
     @Autowired
     private UserDAO userDao;
 
+    @Autowired
+    private UserService userService;
 
+    
     @GetMapping("/create-account")
     public ModelAndView createAccount() {
         ModelAndView response = new ModelAndView("auth/create-account");
@@ -47,14 +53,7 @@ public class LoginController {
             response.addObject("form", form);
         } else {
             // there were no errors so we can create the new user in the database
-            User user = new User();
-
-            user.setEmail(form.getEmail());
-            user.setPassword(form.getPassword());
-            user.setCreateDate(new Date());
-
-            // save the user to the database
-            userDao.save(user);
+            userService.createUser(form);
         }
 
         return response;

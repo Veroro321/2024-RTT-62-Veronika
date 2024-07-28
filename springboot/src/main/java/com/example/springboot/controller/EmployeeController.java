@@ -14,9 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
@@ -134,9 +132,12 @@ public class EmployeeController {
     }
 
     // this is /employee/createSubmit
-    //this method is only called when the form is submitted
+    // this method is only called when the form is submitted
+    // this is being used for both edit and create because we are checking the incoming employeeid if it is null then it is a create
+    // you can use one or the other of @PostMapping or @RequestMapping
 
-    @GetMapping("/createSubmit") //it can get tiring to create request param so we will use Form bean
+//   @PostMapping("/createSubmit") //it can get tiring to create request param so we will use Form bean
+    @RequestMapping(value = "/createSubmit", method = { RequestMethod.POST, RequestMethod.GET })
     public ModelAndView createSubmit(@Valid CreateEmployeeFormBean form, BindingResult bindingResult) {// the @valid is saying go to form bean and do validation
         // argument to the constrcutor ere is the view name the view name can be a jsp location or a redirect URL
         ModelAndView response = new ModelAndView();
@@ -219,8 +220,11 @@ public class EmployeeController {
             employee = employeeDao.save(employee);
             //this is after the redirect is actually a full url not a view name
             //this is overriding the behavior of the setViewName to use a URl rather than a JSP file location
-            response.setViewName("redirect:/employee/detail?employeeId=" + employee.getId());
+//          response.setViewName("redirect:/employee/detail?employeeId=" + employee.getId());
             //usually it would redirect towards an edit page, but we have not created that yet.
+
+            loadDropdowns(response);
+            response.setViewName("employee/create");
 
             return response;
 
