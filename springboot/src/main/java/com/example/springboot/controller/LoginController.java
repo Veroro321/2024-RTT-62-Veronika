@@ -32,7 +32,12 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    
+    @GetMapping("/loginPageUrl")
+    public ModelAndView loginPage() {
+        ModelAndView response = new ModelAndView("auth/login");
+        return response;
+    }
+
     @GetMapping("/create-account")
     public ModelAndView createAccount() {
         ModelAndView response = new ModelAndView("auth/create-account");

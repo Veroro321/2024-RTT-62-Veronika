@@ -1,3 +1,5 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -42,9 +44,27 @@
                     <a class="nav-link" href="/file-upload">File Upload</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/account/create-account">File Upload</a>
+                    <a class="nav-link" href="/account/create-account">Create User</a>
+                </li>
+
+                <sec:authorize access="!isAuthenticated()">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/account/loginPageUrl">Log In</a>
+                    </li>
+                </sec:authorize>
+
+                <sec:authorize access="isAuthenticated()">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login/logout">Log Out</a>
+                    </li>
+                </sec:authorize>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/account/create-account">Sign Up</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+</body>
+</html>
