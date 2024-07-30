@@ -57,7 +57,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/login/logout">Log Out</a>
                     </li>
+                    <li class="nav-item">
+                        <span class="nav-link"><sec:authentication property="name"/></span>
+                    </li>
                 </sec:authorize>
+
 
                 <li class="nav-item">
                     <a class="nav-link" href="/account/create-account">Sign Up</a>

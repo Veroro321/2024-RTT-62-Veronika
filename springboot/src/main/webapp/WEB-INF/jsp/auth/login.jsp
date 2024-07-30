@@ -12,6 +12,18 @@
 
 <section>
     <div class="container">
+
+        <c:if test="${param['error']}">
+            <div class="row pt-5 justify-content-center">
+                <div class="col-6">
+                    <div class="alert alert-danger" role="alert">
+                        Invalid Username or Password
+                    </div>
+                </div>
+            </div>
+        </c:if>
+
+
         <div class="row pt-5 ">
             <div class="col-12">
                 <form action="/account/loginProcessingURL" method="post"> <%-- same thing in spring security --%>

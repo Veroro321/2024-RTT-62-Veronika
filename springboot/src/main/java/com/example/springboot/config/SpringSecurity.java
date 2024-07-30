@@ -2,13 +2,18 @@ package com.example.springboot.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+
 @Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SpringSecurity {
 
 
@@ -22,7 +27,7 @@ public class SpringSecurity {
         // anything in AntPathRequestMatcher will require the user to be authenticated
         //people that are not logged in and can see any public page resource
         // users that are logged but do not have any user roles to gran access to a resouces
-        //users that are logged in and ahve a uesr role that grans acess to a resource
+        //users that are logged in and have a user role that grans access to a resource
         http.authorizeRequests()
                 .requestMatchers(
                         new AntPathRequestMatcher("/admin/**"),
