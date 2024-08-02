@@ -2,6 +2,8 @@ package com.example.springboot.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -26,13 +28,13 @@ public class SpringSecurity {
         // this section says allow all pages EXCEPT the ones that are in the AntPathRequestMatcher
         // anything in AntPathRequestMatcher will require the user to be authenticated
         //people that are not logged in and can see any public page resource
-        // users that are logged but do not have any user roles to gran access to a resouces
+        // users that are logged but do not have any user roles to grant access to a resources
         //users that are logged in and have a user role that grans access to a resource
         http.authorizeRequests()
                 .requestMatchers(
                         new AntPathRequestMatcher("/admin/**"),
                         new AntPathRequestMatcher("/employee/**")).authenticated()
-                .anyRequest().permitAll();
+                .anyRequest().permitAll(); //all url are permited except the ones listed here
 
 
         // the loginPage parameter is the actual URL of the login page
@@ -64,6 +66,11 @@ public class SpringSecurity {
     @Bean(name = "passwordEncoder") //in our user service, enable to autowordder, encode before saving into the database
     public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+        return authConfig.getAuthenticationManager();
     }
 
 }
